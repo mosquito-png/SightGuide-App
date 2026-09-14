@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SightGuide - Emergency Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#656466",
+                        "tertiary-container": "#e4e2e4",
+                        "on-surface": "#e2e2e2",
+                        "on-primary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "on-background": "#e2e2e2",
+                        "background": "#131313",
+                        "surface-container-low": "#1b1b1b",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container": "#1f1f1f",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary": "#c6c6cb",
+                        "primary-fixed": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#636565",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#2f3034",
+                        "inverse-surface": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-bright": "#393939",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353535",
+                        "surface-variant": "#353535",
+                        "surface": "#131313",
+                        "primary": "#ffffff",
+                        "tertiary": "#ffffff",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#8e9192",
+                        "secondary-container": "#46464b",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#b5b4ba",
+                        "on-tertiary": "#303032",
+                        "outline-variant": "#444748",
+                        "primary-container": "#e2e2e2",
+                        "secondary-fixed": "#e3e2e7",
+                        "secondary-fixed-dim": "#c6c6cb",
+                        "surface-tint": "#c6c6c7",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-fixed": "#e4e2e4",
+                        "on-primary": "#2f3131",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed-variant": "#474649"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "touch-target-min": "56px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-core": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "body-xl": ["20px", { "lineHeight": "30px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-core": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.05); }
+        }
+        .countdown-circle {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: countdown 5s linear forwards;
+        }
+        @keyframes countdown {
+            to { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-sans selection:bg-surface-container-highest">
+<!-- Top Navigation (Shell suppressed for this transactional flow, but Header typography anchor maintained) -->
+<header class="flex justify-between items-center w-full px-margin-mobile h-[64px] z-50 mt-8 mb-4 md:mt-margin-desktop">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="emergency" data-weight="fill" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<h1 class="font-label-bold text-label-bold tracking-widest text-primary uppercase">SIGHTGUIDE</h1>
+</div>
+<button aria-label="Cancel" class="h-touch-target-min w-touch-target-min flex items-center justify-center rounded-full bg-surface-container-low hover:bg-surface-container-highest transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface" data-icon="close">close</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile pb-margin-mobile relative">
+<!-- Center Core / Countdown -->
+<div class="relative w-64 h-64 flex items-center justify-center mb-12">
+<!-- Pulsing background rings -->
+<div class="absolute inset-0 rounded-full border-2 border-outline-variant opacity-20 pulse-slow" style="animation-delay: 0s;"></div>
+<div class="absolute inset-4 rounded-full border-2 border-outline-variant opacity-40 pulse-slow" style="animation-delay: 0.5s;"></div>
+<!-- SVG Countdown Circle -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#353535" stroke-width="4"></circle>
+<circle class="countdown-circle" cx="50" cy="50" fill="none" r="45" stroke="#ffffff" stroke-width="4"></circle>
+</svg>
+<!-- Large Typography Core -->
+<div class="z-10 text-center flex flex-col items-center">
+<span class="font-display-core text-display-core text-primary tracking-tighter" id="countdown-text">5</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant uppercase tracking-widest mt-2">Seconds</span>
+</div>
+</div>
+<!-- Typography -->
+<div class="text-center max-w-xl mx-auto mb-12 space-y-6">
+<h2 class="font-display-core text-display-core text-primary tracking-tight">EMERGENCY MODE</h2>
+<p class="font-body-xl text-body-xl text-on-surface-variant">Are you sure you want to activate emergency assistance?</p>
+</div>
+<!-- Voice Confirmation Indicators -->
+<div class="flex flex-col md:flex-row gap-6 w-full max-w-md mx-auto mb-12">
+<button class="flex-1 h-20 bg-primary text-background rounded-xl border border-primary flex items-center justify-center gap-3 hover:bg-on-surface-variant transition-colors active:scale-95 shadow-sm haptic-feedback">
+<span class="material-symbols-outlined" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+<span class="font-headline-md text-headline-md">YES</span>
+</button>
+<button class="flex-1 h-20 bg-surface-container-low text-primary rounded-xl border border-outline-variant flex items-center justify-center gap-3 hover:bg-surface-container-highest transition-colors active:scale-95">
+<span class="font-headline-md text-headline-md">NO</span>
+</button>
+</div>
+<!-- Status Indicators -->
+<div class="w-full max-w-sm mx-auto space-y-4 text-left border-t border-outline-variant pt-8">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-slow"></div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="location_on">location_on</span>
+<span class="font-body-lg text-body-lg text-on-surface">Location Sharing Activating...</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-slow" style="animation-delay: 0.3s;"></div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="contacts">contacts</span>
+<span class="font-body-lg text-body-lg text-on-surface">Notifying Contacts...</span>
+</div>
+</div>
+</main>
+<script>
+        // Simple countdown logic
+        let count = 5;
+        const countdownElement = document.getElementById('countdown-text');
+        
+        const interval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownElement.textContent = count;
+            } else {
+                countdownElement.textContent = '0';
+                clearInterval(interval);
+                // Trigger action here
+            }
+        }, 1000);
+    </script>
+</body></html>

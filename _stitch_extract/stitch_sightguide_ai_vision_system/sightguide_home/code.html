@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SightGuide AI - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#656466",
+                        "tertiary-container": "#e4e2e4",
+                        "on-surface": "#e2e2e2",
+                        "on-primary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#46464b",
+                        "on-background": "#e2e2e2",
+                        "background": "#131313",
+                        "surface-container-low": "#1b1b1b",
+                        "on-secondary-fixed": "#1a1b1f",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container": "#1f1f1f",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary": "#c6c6cb",
+                        "primary-fixed": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#636565",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#2f3034",
+                        "inverse-surface": "#e2e2e2",
+                        "inverse-on-surface": "#303030",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "surface-bright": "#393939",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353535",
+                        "surface-variant": "#353535",
+                        "surface": "#131313",
+                        "primary": "#ffffff",
+                        "tertiary": "#ffffff",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#8e9192",
+                        "secondary-container": "#46464b",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#b5b4ba",
+                        "on-tertiary": "#303032",
+                        "outline-variant": "#444748",
+                        "primary-container": "#e2e2e2",
+                        "secondary-fixed": "#e3e2e7",
+                        "secondary-fixed-dim": "#c6c6cb",
+                        "surface-tint": "#c6c6c7",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-fixed": "#e4e2e4",
+                        "on-primary": "#2f3131",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed-variant": "#474649"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "24px",
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "touch-target-min": "56px"
+                    },
+                    "fontFamily": {
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display-core": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-bold": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "body-xl": ["20px", { "lineHeight": "30px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-core": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e0e0e; /* surface-container-lowest mapping to near black */
+            color: #e2e2e2; /* on-background */
+        }
+        
+        .core-container {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: pulse 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.8; }
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #c6c6cb; /* secondary - silver */
+        }
+        
+        .status-dot.inactive {
+            background-color: #444748; /* outline-variant */
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-between font-body-lg">
+<!-- Top Status Area -->
+<header class="w-full flex justify-center py-margin-mobile px-margin-mobile">
+<div class="flex items-center gap-6 bg-surface-container-low px-6 py-4 rounded-full border border-surface-container-highest shadow-sm">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+<div class="status-dot"></div>
+</div>
+<div class="w-px h-6 bg-outline-variant opacity-50"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="videocam" data-weight="fill" style="font-variation-settings: 'FILL' 1;">videocam</span>
+<div class="status-dot"></div>
+</div>
+<div class="w-px h-6 bg-outline-variant opacity-50"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="status-dot"></div>
+</div>
+<div class="w-px h-6 bg-outline-variant opacity-50"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="wifi" data-weight="fill" style="font-variation-settings: 'FILL' 1;">wifi</span>
+<div class="status-dot"></div>
+</div>
+<div class="w-px h-6 bg-outline-variant opacity-50"></div>
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="memory" data-weight="fill" style="font-variation-settings: 'FILL' 1;">memory</span>
+<div class="status-dot"></div>
+</div>
+</div>
+</header>
+<!-- Centerpiece -->
+<main class="flex-1 flex flex-col items-center justify-center w-full px-margin-mobile">
+<div class="relative flex items-center justify-center mb-12">
+<div class="pulse-ring"></div>
+<div class="core-container border border-surface-container-highest cursor-pointer hover:scale-[1.02]" id="core-trigger">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full" -->
+<div class="absolute inset-0 w-full h-full" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+
+// Uniforms for state (Simulated via time/motion here, 
+// but would be tied to app logic in a real product)
+// State 1: Idle (Slow pulse)
+// State 2: Listening (Active expansion/contraction)
+// State 3: Processing (Fluid rotation)
+
+varying vec2 v_texCoord;
+
+float circle(vec2 uv, float radius, float blur) {
+    float d = length(uv);
+    return smoothstep(radius, radius - blur, d);
+}
+
+void main() {
+    vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+    
+    // Core color - Silver/White palette from design system
+    vec3 color1 = vec3(0.95, 0.95, 0.98); // Soft White
+    vec3 color2 = vec3(0.7, 0.72, 0.75);   // Silver
+    vec3 bgColor = vec3(0.05, 0.05, 0.06); // Deep Charcoal/Black
+    
+    // Breathing/Pulse effect
+    float pulse = 0.5 + 0.1 * sin(u_time * 1.5);
+    
+    // Fluid internal motion
+    float wave = sin(uv.x * 5.0 + u_time) * 0.05;
+    vec2 fluidUv = uv + vec2(wave, cos(uv.y * 3.0 + u_time * 0.8) * 0.05);
+    
+    // Layered Orbs for a "Core" look
+    float innerCore = circle(fluidUv, 0.4 * pulse, 0.15);
+    float glow = circle(uv, 0.55 * pulse, 0.4);
+    
+    vec3 finalColor = mix(bgColor, color2, glow * 0.4);
+    finalColor = mix(finalColor, color1, innerCore);
+    
+    // Subtle chromatic aberration/fringe
+    float fringe = circle(uv, 0.42 * pulse, 0.02);
+    finalColor += vec3(0.02, 0.01, 0.05) * fringe;
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+</div>
+</div>
+<div class="text-center flex flex-col items-center gap-4">
+<h1 class="font-display-core text-display-core text-primary tracking-tight">Ready</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant opacity-80">Say "Hey SightGuide"</p>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Contextually relevant for top-level ecosystem) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-8 pt-4 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-t border-outline-variant dark:border-outline-variant rounded-t-xl md:hidden">
+<!-- Explore -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant w-14 h-14 hover:text-primary dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="explore">explore</span>
+</a>
+<!-- Home / Active -->
+<a class="flex items-center justify-center bg-primary dark:bg-primary text-on-primary dark:text-on-primary rounded-full w-14 h-14 scale-90 duration-200" href="#" id="nav-home">
+<span class="material-symbols-outlined text-[28px]" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+</a>
+<!-- Visibility -->
+<a class="flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant w-14 h-14 hover:text-primary dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-[28px]" data-icon="visibility">visibility</span>
+</a>
+</nav>
+<!-- Desktop Navigation Shell -->
+<header class="hidden md:flex justify-between items-center w-full px-margin-mobile h-[64px] z-50 fixed top-0 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant">
+<div class="flex items-center gap-4 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors p-2 rounded cursor-pointer">
+<span class="material-symbols-outlined text-primary dark:text-primary" data-icon="settings">settings</span>
+</div>
+<div class="text-label-bold font-label-bold tracking-widest text-primary dark:text-primary">
+            SIGHTGUIDE
+        </div>
+<div class="flex items-center gap-4 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors p-2 rounded cursor-pointer">
+<span class="material-symbols-outlined text-primary dark:text-primary" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<script>
+        // Simple haptic simulation logic
+        document.getElementById('core-trigger').addEventListener('click', () => {
+            if (navigator.vibrate) {
+                navigator.vibrate([50, 50, 50]);
+            }
+        });
+        
+        document.getElementById('nav-home').addEventListener('click', () => {
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+        });
+    </script>
+</body></html>
