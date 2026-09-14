@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SightGuide</string>
+    <string name="title_activity_main">SightGuide</string>
+    <string name="package_name">com.sightguide.app</string>
+    <string name="custom_url_scheme">com.sightguide.app</string>
+    <string name="accessibility_service_label">SightGuide Voice Accessibility</string>
+    <string name="accessibility_service_description">Allows blind and visually impaired users to navigate their phone, click elements, dictate text, scroll, and control apps using natural voice commands.</string>
+</resources>
