@@ -1640,7 +1640,7 @@ function Settings({
             type="text"
             value={customUrl}
             onChange={(e) => setCustomUrl(e.target.value)}
-            placeholder="https://web-production-430eb.up.railway.app/api"
+            placeholder="https://web-production-e7691.up.railway.app/api"
             style={{ flex: 1, padding: "0.5rem 0.75rem", borderRadius: "6px", background: "#1e1f23", border: "1px solid #444748", color: "#e3e2e7" }}
           />
           <button type="submit" style={{ padding: "0.5rem 1rem", borderRadius: "6px", background: "#e3e2e7", color: "#121317", fontWeight: 700, border: "none" }}>

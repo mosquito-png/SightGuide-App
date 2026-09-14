@@ -13,7 +13,7 @@ export class ApiError extends Error {
 }
 
 const STORAGE_API_KEY = "sightguide.api_url";
-export const DEFAULT_PRODUCTION_API_URL = "https://web-production-430eb.up.railway.app/api";
+export const DEFAULT_PRODUCTION_API_URL = "https://web-production-e7691.up.railway.app/api";
 
 export function getCustomApiBaseUrl(): string | null {
   try {
